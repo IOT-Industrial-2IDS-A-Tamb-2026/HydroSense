@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HydroSense IIoT - Monitoramento Inteligente de Vazamentos Industriais</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Configuração Tailwind HydroSense -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#0A192F',
+                            card: '#0F2342',
+                            cyan: '#00F2FE',
+                            purple: '#A855F7',
+                            blue: '#3B82F6',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #0A192F; }
+
+        .glass-nav {
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(15, 35, 66, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(15, 35, 66, 0.85);
+            border-color: rgba(0, 242, 254, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -15px rgba(0, 242, 254, 0.2);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #00F2FE 50%, #A855F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #00F2FE 0%, #3B82F6 50%, #A855F7 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 242, 254, 0.4);
+        }
+
+        .glow-bg {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-brand-cyan selection:text-slate-900">
+
+    <!-- Luzes de Fundo -->
+    <div class="glow-bg w-[500px] h-[500px] bg-brand-cyan/15 top-[-100px] left-[-100px]"></div>
+    <div class="glow-bg w-[600px] h-[600px] bg-brand-purple/15 top-[35%] right-[-100px]"></div>
+
+    <!-- NAVBAR -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav">
+        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-xl tracking-tight text-white leading-none">
+                        Hydro<span class="text-gradient">Sense</span>
+                    </span>
+                    <span class="text-[9px] text-cyan-400 font-semibold tracking-wider uppercase mt-1">IIoT Industrial</span>
+                </div>
+            </a>
+
+            <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <li><a href="index.html" class="text-brand-cyan font-semibold border-b-2 border-brand-cyan pb-1">Início</a></li>
+                <li><a href="sobre.html" class="hover:text-brand-cyan transition-colors">Sobre Nós</a></li>
+                <li><a href="solucao.html" class="hover:text-brand-cyan transition-colors">Solução IIoT</a></li>
+                <li><a href="produtos_servicos.html" class="hover:text-brand-cyan transition-colors">Produtos & Serviços</a></li>
+                <li><a href="diferenciais.html" class="hover:text-brand-cyan transition-colors">Diferenciais</a></li>
+            </ul>
+
+            <div class="hidden sm:flex items-center">
+                <a href="contato.html" class="btn-gradient px-6 py-2.5 rounded-xl font-semibold text-sm text-white shadow-lg">
+                    Contato
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION MODIFICADA COM SIMULAÇÃO DE DASHBOARD DE MONITORAMENTO -->
+    <section class="relative pt-36 pb-16 md:pt-44 md:pb-24 max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Lado Esquerdo: Texto & CTA -->
+            <div class="lg:col-span-7 text-center lg:text-left">
+                <div data-aos="fade-down" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs md:text-sm font-medium mb-6">
+                    <span class="flex h-2 w-2 rounded-full bg-brand-cyan animate-ping"></span>
+                    <span>IIoT Contra Perdas de Água na Indústria</span>
+                </div>
+
+                <h1 data-aos="fade-up" data-aos-delay="100" class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15]">
+                    Sua rede hídrica sob <span class="text-gradient">controle total em tempo real.</span>
+                </h1>
+
+                <p data-aos="fade-up" data-aos-delay="200" class="mt-6 text-slate-300 text-base sm:text-lg leading-relaxed">
+                    Identifique microvazamentos, estanque o fluxo de água remotamente via rede **MQTT/LoRaWAN** e previna paradas não planejadas na sua linha de produção.
+                </p>
+
+                <div data-aos="fade-up" data-aos-delay="300" class="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="solucao.html" class="w-full sm:w-auto btn-gradient px-8 py-4 rounded-xl font-semibold text-white shadow-xl flex items-center justify-center gap-2">
+                        <span>Ver Arquitetura Técnica</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                    <a href="contato.html" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-slate-700 hover:border-cyan-500/50 bg-slate-900/50 font-semibold text-slate-300 hover:text-white transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="shield-alert" class="w-5 h-5 text-brand-cyan"></i>
+                        <span>Solicitar Diagnóstico</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Lado Direito: SIMULAÇÃO DE PAINEL DE MONITORAMENTO DE VAZAMENTO -->
+            <div class="lg:col-span-5" data-aos="fade-left" data-aos-delay="200">
+                <div class="glass-card p-6 rounded-3xl border border-cyan-500/30 relative overflow-hidden shadow-2xl">
+                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-700/60">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-300">Status do Setor: Setor B3 - Tubulação Principal</span>
+                        </div>
+                        <span class="text-xs text-brand-cyan font-mono">MQTT: ONLINE</span>
+                    </div>
+
+                    <!-- Métricas ao Vivo Simulated -->
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                            <span class="text-xs text-slate-400 block mb-1">Vazão Atual</span>
+                            <span class="text-2xl font-bold font-mono text-white">42.8 <span class="text-xs text-cyan-400">L/min</span></span>
+                        </div>
+                        <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                            <span class="text-xs text-slate-400 block mb-1">Pressão da Rede</span>
+                            <span class="text-2xl font-bold font-mono text-emerald-400">3.4 <span class="text-xs">Bar</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Alerta de Vazamento Prevenido -->
+                    <div class="bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-xl flex items-start gap-3">
+                        <i data-lucide="check-circle-2" class="w-6 h-6 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="text-sm font-semibold text-emerald-300">Sistema Estável & Monitorado</h4>
+                            <p class="text-xs text-slate-300 mt-1">Válvula de bloqueio solenóide pronta para atuação automática em caso de queda brusca de pressão.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- METRICAS DE IMPACTO -->
+    <section class="max-w-7xl mx-auto px-6 py-8">
+        <div data-aos="fade-up" class="grid grid-cols-2 md:grid-cols-4 gap-4 p-8 glass-card rounded-2xl">
+            <div class="text-center">
+                <span class="block text-3xl sm:text-4xl font-extrabold text-brand-cyan font-display">&lt; 2 seg</span>
+                <span class="text-xs text-slate-400 uppercase tracking-wider mt-1 block">Tempo de Reação</span>
+            </div>
+            <div class="text-center">
+                <span class="block text-3xl sm:text-4xl font-extrabold text-brand-purple font-display">100%</span>
+                <span class="text-xs text-slate-400 uppercase tracking-wider mt-1 block">Rastreabilidade I/O</span>
+            </div>
+            <div class="text-center">
+                <span class="block text-3xl sm:text-4xl font-extrabold text-brand-cyan font-display">MQTT/LoRa</span>
+                <span class="text-xs text-slate-400 uppercase tracking-wider mt-1 block">Protocolo Industrial</span>
+            </div>
+            <div class="text-center">
+                <span class="block text-3xl sm:text-4xl font-extrabold text-brand-purple font-display">Zero</span>
+                <span class="text-xs text-slate-400 uppercase tracking-wider mt-1 block">Desperdício Desapercebido</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA DE TECNOLOGIA & IMAGENS INDUSTRIAIS -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <span class="text-xs font-semibold uppercase tracking-wider text-brand-cyan">Infraestrutura HydroSense</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-1">Hardware e Software Projetados para a Indústria 4.0</h2>
+            <p class="mt-4 text-slate-400 text-sm sm:text-base">Combinação perfeita de sensoriamento físico avançado e inteligência em nuvem.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            
+            <!-- Imagem 1: Tubulações & Planta Industrial -->
+            <div class="glass-card p-4 rounded-3xl group" data-aos="fade-right">
+                <div class="relative rounded-2xl overflow-hidden h-72">
+                    <img src="images/planta_industrial.jpg" alt="Tubulações Industriais Monitoradas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-6">
+                        <div>
+                            <span class="text-xs font-semibold text-brand-cyan uppercase">Ambiente Físico</span>
+                            <h3 class="text-lg font-bold text-white">Sensores Não-Invasivos em Tubulações</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Imagem 2: Dashboard de Monitoramento IIoT -->
+            <div class="glass-card p-4 rounded-3xl group" data-aos="fade-left">
+                <div class="relative rounded-2xl overflow-hidden h-72">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Dashboard Digital HydroSense IIoT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-6">
+                        <div>
+                            <span class="text-xs font-semibold text-brand-purple uppercase">Ambiente Digital</span>
+                            <h3 class="text-lg font-bold text-white">Telemetria & Gráficos de Vazão Preditivos</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TABELA COMPONENTES & HARDWARE IIoT (ATENDE REQUISITOS DA UC) -->
+    <section class="max-w-7xl mx-auto px-6 py-12">
+        <div class="glass-card p-8 rounded-3xl" data-aos="fade-up">
+            <h3 class="font-display text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <i data-lucide="cpu" class="w-6 h-6 text-brand-cyan"></i>
+                <span>Hardwares & Dispositivos Utilizados na Solução</span>
+            </h3>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-700/80 text-xs text-brand-cyan uppercase tracking-wider">
+                            <th class="pb-3">Componente / Hardware</th>
+                            <th class="pb-3">Tipo de Interface I/O</th>
+                            <th class="pb-3">Função na Solução HydroSense</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800 text-sm text-slate-300">
+                        <tr>
+                            <td class="py-3.5 font-semibold text-white">ESP32 / NodeMCU</td>
+                            <td class="py-3.5"><span class="px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 text-xs">Microcontrolador</span></td>
+                            <td class="py-3.5">Leitura de sensores analógicos e transmissão via Wi-Fi/MQTT.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 font-semibold text-white">Sensor de Vazão YF-S201 / Ultrassônico</td>
+                            <td class="py-3.5"><span class="px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-300 text-xs">Entrada Analógica / Pulso</span></td>
+                            <td class="py-3.5">Mede a passagem contínua de água em litros por minuto.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 font-semibold text-white">Válvula Solenóide Industrial 12V/24V</td>
+                            <td class="py-3.5"><span class="px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-300 text-xs">Saída Digital (Atuador)</span></td>
+                            <td class="py-3.5">Interrompe o fluxo de água instantaneamente quando detectado vazamento.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 font-semibold text-white">Broker MQTT (Mosquitto/HiveMQ)</td>
+                            <td class="py-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 text-xs">Protocolo de Comunicação</span></td>
+                            <td class="py-3.5">Garante envio leve e ultrarrápido dos dados de telemetria.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-20 border-t border-slate-800 bg-[#071120] text-slate-400 py-16">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-lucide="droplet" class="w-6 h-6 text-brand-cyan"></i>
+                    <span class="font-display font-bold text-lg text-white">HydroSense IIoT</span>
+                </div>
+                <p class="text-sm leading-relaxed text-slate-400">
+                    Soluções de engenharia para gestão hídrica, prevenção de perdas e automação inteligente na Indústria 4.0.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Navegação</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="index.html" class="hover:text-brand-cyan transition-colors">Início</a></li>
+                    <li><a href="sobre.html" class="hover:text-brand-cyan transition-colors">Sobre Nós</a></li>
+                    <li><a href="solucao.html" class="hover:text-brand-cyan transition-colors">Solução IIoT</a></li>
+                    <li><a href="produtos_servicos.html" class="hover:text-brand-cyan transition-colors">Produtos & Serviços</a></li>
+                    <li><a href="diferenciais.html" class="hover:text-brand-cyan transition-colors">Diferenciais</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Contato</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-brand-cyan"></i> comercial@hydrosense.com.br</li>
+                    <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-brand-cyan"></i> 0800 770 4930</li>
+                    <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-brand-cyan"></i> São Paulo - SP, Brasil</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 border-t border-slate-800/60 pt-8 text-center text-xs text-slate-500">
+            <p>&copy; 2026 HydroSense IIoT. Todos os direitos reservados. Projeto Integrador Indústria 4.0.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+        lucide.createIcons();
+    </script>
+</body>
+</html>

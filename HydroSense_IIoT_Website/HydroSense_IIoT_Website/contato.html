@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato & Pitch - HydroSense IIoT</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Configuração da Paleta HydroSense -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#0A192F',       /* Cor exata do fundo da marca */
+                            card: '#0F2342',     /* Fundo dos cards */
+                            cyan: '#00F2FE',     /* Azul ciano neon */
+                            purple: '#A855F7',   /* Roxo em gradiente */
+                            blue: '#3B82F6',     /* Azul royal */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0A192F;
+        }
+
+        /* Efeito Vidro Fosco */
+        .glass-nav {
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(15, 35, 66, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 15px 30px -10px rgba(0, 242, 254, 0.15);
+        }
+
+        /* Campos de Entrada Personalizados */
+        .input-field {
+            background: rgba(10, 25, 47, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #00F2FE;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+            background: rgba(10, 25, 47, 0.85);
+        }
+
+        /* Texto e Botões em Gradiente HydroSense */
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #00F2FE 50%, #A855F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #00F2FE 0%, #3B82F6 50%, #A855F7 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 242, 254, 0.4);
+        }
+
+        .glow-bg {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-brand-cyan selection:text-slate-900">
+
+    <!-- Luzes de Fundo (Glow Effect) -->
+    <div class="glow-bg w-[500px] h-[500px] bg-brand-cyan/15 top-[-100px] right-[-100px]"></div>
+    <div class="glow-bg w-[600px] h-[600px] bg-brand-purple/15 top-[50%] left-[-100px]"></div>
+
+    <!-- CABEÇALHO / NAVBAR -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav">
+        <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            
+            <!-- Logo HydroSense -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-xl tracking-tight text-white leading-none">
+                        Hydro<span class="text-gradient">Sense</span>
+                    </span>
+                    <span class="text-[9px] text-cyan-400 font-semibold tracking-wider uppercase mt-1">IIoT Industrial</span>
+                </div>
+            </a>
+
+            <!-- Links de Navegação -->
+            <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <li><a href="index.html" class="hover:text-brand-cyan transition-colors">Início</a></li>
+                <li><a href="sobre.html" class="hover:text-brand-cyan transition-colors">Sobre Nós</a></li>
+                <li><a href="solucao.html" class="hover:text-brand-cyan transition-colors">Solução IoT</a></li>
+                <li><a href="produtos_servicos.html" class="hover:text-brand-cyan transition-colors">Produtos & Serviços</a></li>
+                <li><a href="diferenciais.html" class="hover:text-brand-cyan transition-colors">Diferenciais</a></li>
+            </ul>
+
+            <!-- Botão de Contato -->
+            <div class="hidden sm:flex items-center">
+                <a href="contato.html" class="btn-gradient px-6 py-2.5 rounded-xl font-semibold text-sm text-white shadow-lg">
+                    Contato
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION (CONTATO) -->
+    <section class="relative pt-36 pb-12 md:pt-48 md:pb-16 max-w-7xl mx-auto px-6 text-center">
+        <div data-aos="fade-down" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs md:text-sm font-medium mb-6">
+            <i data-lucide="mail" class="w-4 h-4 text-brand-cyan"></i>
+            <span>Atendimento Especializado</span>
+        </div>
+
+        <h1 data-aos="fade-up" data-aos-delay="100" class="font-display text-4xl sm:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight">
+            Entre em Contato <span class="text-gradient">Conosco</span>
+        </h1>
+
+        <p data-aos="fade-up" data-aos-delay="200" class="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto font-normal leading-relaxed">
+            Agende uma demonstração prática ou converse com nossa equipe de especialistas.
+        </p>
+    </section>
+
+    <!-- CONTEÚDO PRINCIPAL (FORMULÁRIO + INFORMAÇÕES) -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
+            
+            <!-- FORMULÁRIO DE CONTATO (8 Colunas em telas grandes) -->
+            <div data-aos="fade-right" class="lg:col-span-7 glass-card p-8 sm:p-10 rounded-3xl relative">
+                <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                    <i data-lucide="send" class="w-6 h-6 text-brand-cyan"></i>
+                    Solicitar Proposta Industrial
+                </h2>
+                <p class="text-slate-400 text-sm mb-8">Preencha os campos abaixo para receber o contato da nossa equipe de engenharia.</p>
+
+                <form action="#" method="POST" onsubmit="alert('Obrigado! Mensagem enviada com sucesso.'); return false;" class="space-y-6">
+                    <div>
+                        <label for="nome" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Nome Completo</label>
+                        <input type="text" id="nome" required placeholder="Seu nome ou da empresa" class="w-full px-4 py-3.5 rounded-xl input-field text-sm">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">E-mail Corporativo</label>
+                        <input type="email" id="email" required placeholder="seuemail@empresa.com.br" class="w-full px-4 py-3.5 rounded-xl input-field text-sm">
+                    </div>
+
+                    <div>
+                        <label for="setor" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Setor Industrial</label>
+                        <input type="text" id="setor" placeholder="Ex: Química, Alimentícia, Têxtil" class="w-full px-4 py-3.5 rounded-xl input-field text-sm">
+                    </div>
+
+                    <div>
+                        <label for="mensagem" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Detalhes do Projeto / Mensagem</label>
+                        <textarea id="mensagem" rows="5" placeholder="Descreva sua necessidade de monitoramento..." class="w-full px-4 py-3.5 rounded-xl input-field text-sm resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full btn-gradient py-4 rounded-xl font-bold text-base text-white shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+                        <span>Enviar Solicitação</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- INFORMAÇÕES DO PROJETO & EMPRESA (5 Colunas em telas grandes) -->
+            <div data-aos="fade-left" class="lg:col-span-5 space-y-6">
+                
+                <div>
+                    <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mb-2">
+                        Informações da Empresa Fictícia
+                    </h2>
+                    <p class="text-slate-400 text-sm mb-6">
+                        Sede desenvolvida para o Projeto Integrador de IIoT - Indústria 4.0.
+                    </p>
+                </div>
+
+                <!-- Card 1: Endereço -->
+                <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
+                    <div class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-brand-cyan shrink-0">
+                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-lg font-bold text-white mb-1">Endereço Industrial</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Av. da Indústria 4.0, nº 1000 - Bairro Tecnológico<br>
+                            São Paulo - SP | CEP: 01000-000
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Central de Atendimento -->
+                <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
+                    <div class="p-3 rounded-xl bg-purple-500/10 border border-purple-500/30 text-brand-purple shrink-0">
+                        <i data-lucide="phone-call" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-lg font-bold text-white mb-1">Central de Atendimento</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Telefone: (11) 4004-8900<br>
+                            E-mail: <a href="mailto:contato@hydrosense.com.br" class="text-brand-cyan hover:underline">contato@hydrosense.com.br</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Integrantes do Projeto -->
+                <div class="glass-card p-6 rounded-2xl flex items-start gap-4 border-l-4 border-l-brand-cyan">
+                    <div class="p-3 rounded-xl bg-blue-500/10 border border-blue-500/30 text-brand-blue shrink-0">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-lg font-bold text-white mb-2">Integrantes do Projeto</h3>
+                        <ul class="space-y-1.5 text-slate-300 text-sm font-medium">
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan"></i> Fernanda Amaral</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan"></i> Anthony</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan"></i> Rubens</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan"></i> Paula</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- RODAPÉ / FOOTER -->
+    <footer class="mt-20 border-t border-slate-800 bg-[#071120] text-slate-400 py-16">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            
+            <!-- Coluna 1 -->
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-lucide="droplet" class="w-6 h-6 text-brand-cyan"></i>
+                    <span class="font-display font-bold text-lg text-white">HydroSense IIoT</span>
+                </div>
+                <p class="text-sm leading-relaxed text-slate-400">
+                    Tecnologia inteligente para proteção de recursos hídricos.
+                </p>
+            </div>
+
+            <!-- Coluna 2 -->
+            <div>
+                <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Navegação</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="index.html" class="hover:text-brand-cyan transition-colors">Início</a></li>
+                    <li><a href="sobre.html" class="hover:text-brand-cyan transition-colors">Sobre Nós</a></li>
+                    <li><a href="solucao.html" class="hover:text-brand-cyan transition-colors">Solução IIoT</a></li>
+                    <li><a href="diferenciais.html" class="hover:text-brand-cyan transition-colors">Diferenciais</a></li>
+                </ul>
+            </div>
+
+            <!-- Coluna 3: Desenvolvimento -->
+            <div>
+                <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Desenvolvimento</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li class="flex items-center gap-2"><i data-lucide="cpu" class="w-4 h-4 text-brand-cyan"></i> Projeto Integrador IIoT</li>
+                    <li class="flex items-center gap-2"><i data-lucide="code" class="w-4 h-4 text-brand-cyan"></i> Desenvolvimento de Sistemas</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 border-t border-slate-800/60 pt-8 text-center text-xs text-slate-500">
+            <p>&copy; 2026 HydroSense IIoT. Todos os direitos reservados. Projeto Integrador Indústria 4.0.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts de Animação e Ícones -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+        lucide.createIcons();
+    </script>
+</body>
+</html>
